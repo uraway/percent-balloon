@@ -1,1 +1,7 @@
 <h2>Dashboard</h2>
+<h3>Ranking</h3>
+<ul class="users">
+  <li *ngFor="let user of users">
+    <span class="badge">{{user.score}}</span> {{user.name}}
+  </li>
+</ul>
