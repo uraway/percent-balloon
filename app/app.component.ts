@@ -1,15 +1,10 @@
+import { RouterLinkActive } from '@angular/router';
 import { Component } from '@angular/core';
 
 @Component({
   moduleId: module.id,
   selector: 'my-app',
-  template: `
-    <h1>Percent Balloon</h1>
-    <nav>
-      <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
-    </nav>
-    <router-outlet></router-outlet>
-  `,
+  templateUrl: 'app.component.html'
 })
 export class AppComponent { }
 
