@@ -13,7 +13,7 @@ export class LoginComponent {
   login(event: any, userName: string) {
     event.preventDefault();
     localStorage.setItem('userName', userName);
-    this.router.navigate(['dashboard']);
+    this.router.navigate(['quiz']);
     console.log('login as ' + userName);
   }
 }

@@ -5,6 +5,7 @@ import { FormsModule }    from '@angular/forms';
 import { AppComponent }         from './app.component';
 import { DashboardComponent }   from './Dashboard/dashboard.component';
 import { LoginComponent } from './Login/login.component';
+import { QuizComponent } from './Quiz/quiz.component';
 
 import { AppRoutingModule }     from './app-routing.module';
 
@@ -17,7 +18,8 @@ import { AppRoutingModule }     from './app-routing.module';
   declarations: [
     AppComponent,
     DashboardComponent,
-    LoginComponent
+    LoginComponent,
+    QuizComponent
   ],
   providers: [],
   bootstrap: [ AppComponent ]

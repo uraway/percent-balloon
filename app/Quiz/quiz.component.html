@@ -1,0 +1,23 @@
+<h2>Quiz</h2>
+
+<div>
+  <label>Score: </label>{{score}}
+</div>
+
+<div *ngIf="currentQuiz">
+
+  <label>
+    Q. {{stage + 1}} <strong>{{currentQuiz.text}}</strong>
+  </label>
+
+  <form role="form" (submit)="next(answer.value)">
+    <label>Answer: </label>
+    <input type="number" required #answer />
+    <button type="submit">Submit</button>
+  </form>
+
+</div>
+
+<div *ngIf="msg">
+  {{msg}}
+</div>
