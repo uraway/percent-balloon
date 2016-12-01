@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subscription } from "rxjs";
+import { TimerObservable } from "rxjs/observable/TimerObservable";
 
 import { Quiz } from './Quiz';
 import { QuizService } from '../Quiz/quiz.service';
@@ -9,15 +12,33 @@ import { QuizService } from '../Quiz/quiz.service';
   templateUrl: 'quiz.component.html',
   providers: [QuizService]
 })
-export class QuizComponent implements OnInit {
+export class QuizComponent implements OnInit, OnDestroy {
   stage = 0;
   currentQuiz: Quiz;
   givenQuizes: Quiz[];
   score = 100;
   answer = 0;
   msg = "";
+  buttonDisabled = false;
+  time = 20;
 
-  constructor(private quizService: QuizService) { }
+  constructor(private quizService: QuizService, private router: Router) {
+    setInterval(() => this.tick(), 1000);
+  }
+
+  ngOnInit(): void {
+    this.getQuizes();
+  }
+
+  ngOnDestroy(): void {
+  }
+
+  tick(): void {
+    this.time -= 1;
+    if (this.time === 0) {
+      this.next(0);
+    }
+  }
 
   getQuizes(): void {
     this.quizService.getQuizes().then((quizes) => {
@@ -26,21 +47,15 @@ export class QuizComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.getQuizes();
-  }
-
   next(userAnswer: number): void {
-    if (this.stage === 5) {
+    this.time = 20;
+    if (this.stage === 5 || this.score <= 0) {
       this.finish();
     } else {
       this.checkAnswer(userAnswer);
-
-      setTimeout(() => {
-        this.stage += 1;
-        this.currentQuiz = this.givenQuizes[this.stage];
-        this.msg = "";
-      }, 1000 * 10);
+      this.stage += 1;
+      this.currentQuiz = this.givenQuizes[this.stage];
+      this.msg = "";
     }
   }
 
@@ -62,8 +77,8 @@ export class QuizComponent implements OnInit {
     this.msg = msg;
   }
 
-  finish() {
-    console.log('finish');
+  finish(): void {
+    this.router.navigate(['result']);
   }
 
   shuffle(array: Array<Quiz>): Array<Quiz> {
