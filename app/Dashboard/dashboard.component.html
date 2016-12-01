@@ -1,7 +1,21 @@
 <h2>Dashboard</h2>
 <h3>Ranking</h3>
-<ul class="users">
-  <li *ngFor="let user of users">
-    <span class="badge">{{user.score}}</span> {{user.name}}
-  </li>
-</ul>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Score</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>
+        {{user.score}}
+      </td>
+      <td>
+        {{user.name}}
+      </td>
+    </tr>
+  </tbody>
+</table>
