@@ -4,8 +4,9 @@ import { FormsModule }    from '@angular/forms';
 
 import { AppComponent }         from './app.component';
 import { DashboardComponent }   from './Dashboard/dashboard.component';
-import { LoginComponent } from './Login/login.component';
+import { HomeComponent } from './Home/home.component';
 import { QuizComponent } from './Quiz/quiz.component';
+import { ResultComponent } from './Result/result.component';
 
 import { AppRoutingModule }     from './app-routing.module';
 
@@ -18,8 +19,9 @@ import { AppRoutingModule }     from './app-routing.module';
   declarations: [
     AppComponent,
     DashboardComponent,
-    LoginComponent,
-    QuizComponent
+    HomeComponent,
+    QuizComponent,
+    ResultComponent
   ],
   providers: [],
   bootstrap: [ AppComponent ]

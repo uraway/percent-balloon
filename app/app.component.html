@@ -1,6 +1,42 @@
-<h1>Percent Balloon</h1>
-  <nav>
-    <a routerLink="/login" RouterLinkActive="active">Login</a>
-    <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
-  </nav>
-<router-outlet></router-outlet>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+
+    <!-- スマートフォンサイズで表示されるメニューボタンとテキスト -->
+    <div class="navbar-header">
+
+      <!--
+
+        メニューボタン
+
+        data-toggle : ボタンを押したときにNavbarを開かせるために必要
+        data-target : 複数navbarを作成する場合、ボタンとナビを紐づけるために必要
+
+      -->
+
+      <!-- タイトルなどのテキスト -->
+      <div id="logo">
+        <a routerLink="/">
+          Percent Balloon
+        </a>
+      </div>
+
+    </div>
+
+    <!-- グローバルナビの中身 -->
+    <div class="collapse navbar-collapse" id="nav-menu-2">
+
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a routerLink="/" class="navbar-link">Home</a>
+        </li>
+        <li>
+          <a routerLink="/dashboard" class="navbar-link">Dashboard</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

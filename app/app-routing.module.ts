@@ -2,14 +2,16 @@ import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { DashboardComponent }   from './Dashboard/dashboard.component';
-import { LoginComponent } from './Login/login.component';
+import { HomeComponent } from './Home/home.component';
 import { QuizComponent } from './Quiz/quiz.component';
+import { ResultComponent } from './Result/result.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'dashboard',  component: DashboardComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'quiz', component: QuizComponent }
+  { path: 'home', component: HomeComponent },
+  { path: 'quiz', component: QuizComponent },
+  { path: 'result', component: ResultComponent }
 ];
 
 @NgModule({
