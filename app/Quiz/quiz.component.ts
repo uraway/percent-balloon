@@ -19,6 +19,7 @@ export class QuizComponent implements OnInit, OnDestroy {
   score = 100;
   answer = 0;
   msg = "";
+  msg2 = "";
   buttonDisabled = false;
 
   constructor(private quizService: QuizService, private router: Router) {}
@@ -57,10 +58,8 @@ export class QuizComponent implements OnInit, OnDestroy {
     if (diff === 0) {
       this.displayMsg('正解!');
     } else {
-      this.displayMsg(`
-        正解: ${correctAnswer}
-        ${diff} のバルーンを失いました!
-      `);
+      this.displayMsg(`正解: ${correctAnswer}`);
+      this.displayMsg2(`${diff} のバルーンを失いました!`);
       this.score -= diff;
       if (this.score <= 0) {
         this.finish(0);
@@ -70,6 +69,10 @@ export class QuizComponent implements OnInit, OnDestroy {
 
   displayMsg(msg: string): void {
     this.msg = msg;
+  }
+
+  displayMsg2(msg2: string): void {
+    this.msg2 = msg2;
   }
 
   displayDiff(diff: string) {

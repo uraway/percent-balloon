@@ -1,7 +1,12 @@
 <h2>Quiz</h2>
 
 <div *ngIf="msg">
-  <span ng-bind-html="msg"></span>
+  <span>{{msg}}</span>
+  <br />
+  <div *ngIf="msg2">
+    <span>{{msg2}}</span>
+  </div>
+  <br />
   <button class="btn btn-secondary" (click)="next()">NEXT</button>
 </div>
 
