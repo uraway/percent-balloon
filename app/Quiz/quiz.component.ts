@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import * as console from 'console';
+import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from "rxjs";
 import { TimerObservable } from "rxjs/observable/TimerObservable";
@@ -12,7 +13,7 @@ import { QuizService } from '../Quiz/quiz.service';
   templateUrl: 'quiz.component.html',
   providers: [QuizService]
 })
-export class QuizComponent implements OnInit, OnDestroy {
+export class QuizComponent implements OnInit, OnDestroy, AfterViewInit {
   stage = 0;
   currentQuiz: Quiz;
   givenQuizes: Quiz[];
@@ -21,11 +22,40 @@ export class QuizComponent implements OnInit, OnDestroy {
   msg = "";
   msg2 = "";
   buttonDisabled = false;
+  context:CanvasRenderingContext2D;
+
+  @ViewChild("myCanvas") myCanvas: any;
 
   constructor(private quizService: QuizService, private router: Router) {}
 
+  ngAfterViewInit() {
+    // 参照をとれる
+    let canvas = this.myCanvas.nativeElement;
+    this.context = canvas.getContext("2d");
+    this.balloons(100);
+  }
+
   ngOnInit(): void {
     this.getQuizes();
+  }
+
+  balloons(i: number): void {
+    requestAnimationFrame(() => {
+      for (let l = 0; l < i; l++) {
+        var ctx = this.context;
+        ctx.beginPath();
+        var x: number = Math.random() * 1000;
+        var y: number = Math.random() * 1000;
+        ctx.arc(x, y, 60, 0, Math.PI*2, false);
+        ctx.stroke();
+        ctx.fillStyle = this.colorGen();
+        ctx.fill();
+      }
+    });
+  }
+
+  colorGen(){
+    return '#'+Math.floor(Math.random()*16777215).toString(16);
   }
 
   ngOnDestroy(): void {
