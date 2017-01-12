@@ -6,6 +6,9 @@ import { AppComponent }         from './app.component';
 import { DashboardComponent }   from './Dashboard/dashboard.component';
 import { HomeComponent } from './Home/home.component';
 import { QuizComponent } from './Quiz/quiz.component';
+import { AddQuizComponent } from './Quizes/add-quiz.component';
+import { QuizDetailComponent } from './QuizDetail/quiz-detail.component';
+import { QuizesComponent } from './Quizes/quizes.component';
 import { ResultComponent } from './Result/result.component';
 
 import { AppRoutingModule }     from './app-routing.module';
@@ -21,6 +24,9 @@ import { AppRoutingModule }     from './app-routing.module';
     DashboardComponent,
     HomeComponent,
     QuizComponent,
+    QuizDetailComponent,
+    QuizesComponent,
+    AddQuizComponent,
     ResultComponent
   ],
   providers: [],

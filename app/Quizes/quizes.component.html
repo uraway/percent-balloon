@@ -1,0 +1,6 @@
+<h2>Quizes</h2>
+<ul class="quizes">
+  <li *ngFor="let quiz of quizes" (click)="onSelect(quiz)">
+    {{quiz.text}} {{quiz.value}} %
+  </li>
+</ul>

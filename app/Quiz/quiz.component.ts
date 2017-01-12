@@ -20,24 +20,14 @@ export class QuizComponent implements OnInit, OnDestroy {
   answer = 0;
   msg = "";
   buttonDisabled = false;
-  time = 20;
 
-  constructor(private quizService: QuizService, private router: Router) {
-    setInterval(() => this.tick(), 1000);
-  }
+  constructor(private quizService: QuizService, private router: Router) {}
 
   ngOnInit(): void {
     this.getQuizes();
   }
 
   ngOnDestroy(): void {
-  }
-
-  tick(): void {
-    this.time -= 1;
-    if (this.time === 0) {
-      this.next(0);
-    }
   }
 
   getQuizes(): void {
@@ -47,12 +37,14 @@ export class QuizComponent implements OnInit, OnDestroy {
     });
   }
 
-  next(userAnswer: number): void {
-    this.time = 20;
-    if (this.stage === 5 || this.score <= 0) {
-      this.finish();
+  submit(userAnswer: number): void {
+    this.checkAnswer(userAnswer);
+  }
+
+  next(): void {
+    if (this.stage === 5) {
+      this.finish(this.score);
     } else {
-      this.checkAnswer(userAnswer);
       this.stage += 1;
       this.currentQuiz = this.givenQuizes[this.stage];
       this.msg = "";
@@ -63,13 +55,16 @@ export class QuizComponent implements OnInit, OnDestroy {
     const correctAnswer = this.currentQuiz.value;
     const diff = Math.abs(correctAnswer - userAnswer);
     if (diff === 0) {
-      this.displayMsg('Correct!');
+      this.displayMsg('正解!');
     } else {
       this.displayMsg(`
-        Correct Answer is ${correctAnswer}
-        Diff is ${diff}!
+        正解: ${correctAnswer}
+        ${diff} のバルーンを失いました!
       `);
       this.score -= diff;
+      if (this.score <= 0) {
+        this.finish(0);
+      }
     }
   }
 
@@ -77,7 +72,12 @@ export class QuizComponent implements OnInit, OnDestroy {
     this.msg = msg;
   }
 
-  finish(): void {
+  displayDiff(diff: string) {
+
+}
+
+  finish(finalScore: number): void {
+    localStorage.setItem('score', String(finalScore));
     this.router.navigate(['result']);
   }
 

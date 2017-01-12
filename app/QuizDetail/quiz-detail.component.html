@@ -1,0 +1,16 @@
+<h2>Quiz Detail</h2>
+<button class="btn btn-secondary" (click)="goBack()">Back</button>
+<div *ngIf="quiz">
+  <div class="form-group">
+    <label>ID: </label><div>{{quiz.id}}</div>
+  </div>
+  <div class="form-group">
+    <label>Text:</label>
+    <input [(ngModel)]="quiz.text" class="form-control" required />
+  </div>
+  <div class="form-group">
+    <label>Answer:</label>
+    <input [(ngModel)]="quiz.value" class="form-control" type="number" required />
+  </div>
+  <button class="btn btn-primary">Update</button>
+</div>
