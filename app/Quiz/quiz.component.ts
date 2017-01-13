@@ -44,8 +44,8 @@ export class QuizComponent implements OnInit, OnDestroy, AfterViewInit {
       for (let l = 0; l < i; l++) {
         var ctx = this.context;
         ctx.beginPath();
-        var x: number = Math.random() * 1000;
-        var y: number = Math.random() * 1000;
+        var x: number = Math.random() * 500 + 100;
+        var y: number = Math.random() * 500 + 100;
         ctx.arc(x, y, 60, 0, Math.PI*2, false);
         ctx.stroke();
         ctx.fillStyle = this.colorGen();
