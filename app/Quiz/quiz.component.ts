@@ -73,10 +73,12 @@ export class QuizComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   submit(userAnswer: number): void {
+    this.buttonDisabled = true;
     this.checkAnswer(userAnswer);
   }
 
   next(): void {
+    this.buttonDisabled = false;
     if (this.stage === 5) {
       this.finish(this.score);
     } else {
