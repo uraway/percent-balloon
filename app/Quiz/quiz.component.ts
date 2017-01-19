@@ -43,13 +43,21 @@ export class QuizComponent implements OnInit, OnDestroy, AfterViewInit {
     requestAnimationFrame(() => {
       for (let l = 0; l < i; l++) {
         var ctx = this.context;
+        var red = new Image();
+        var blue = new Image();
+        var yellow = new Image();
+        var lime = new Image();
+        var purple = new Image();
+
         ctx.beginPath();
-        var img = new Image();
-        var x: number = Math.random() * 500 + 100;
-        var y: number = Math.random() * 500 + 100;
-        img.src = `../../images/balloon_${this.colorGen()}.png`;
-        img.onload = function() {
-          ctx.drawImage(img, x, y, 40, 60);
+        red.src = "../../images/balloon_red.png";
+        blue.src = "../../images/balloon_blue.png";
+        yellow.src = "../../images/balloon_yellow.png";
+        lime.src = "../../images/balloon_lime.png";
+        purple.src = "../../images/balloon_purple.png";
+
+        purple.onload = () => {
+          ctx.drawImage(this.randomOfArray([red, blue, yellow, lime, purple]), this.randomXY(), this.randomXY(), 40, 60);
         }
       }
       ctx.font = "bold 120px 'ＭＳ Ｐゴシック'";
@@ -63,9 +71,12 @@ export class QuizComponent implements OnInit, OnDestroy, AfterViewInit {
     ctx.clearRect(0, 0, 1200, 800);
   }
 
-  colorGen(){
-    const colors = ['red', 'blue', 'yellow'];
-    return colors[Math.floor(Math.random() * colors.length - 1) + 1];
+  randomOfArray(ary: Array<any>){
+    return ary[Math.floor(Math.random() * ary.length)];
+  }
+
+  randomXY() {
+    return Math.random() * 500 + 100;
   }
 
   ngOnDestroy(): void {
