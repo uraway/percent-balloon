@@ -50,6 +50,9 @@ export class QuizComponent implements OnInit, OnDestroy, AfterViewInit {
         ctx.fillStyle = this.colorGen();
         ctx.fill();
       }
+      ctx.font = "bold 120px 'ＭＳ Ｐゴシック'";
+      ctx.fillStyle = "black";
+      ctx.fillText(`${i}`, 250, 350);
     });
   }
 
@@ -59,7 +62,8 @@ export class QuizComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   colorGen(){
-    return '#'+Math.floor(Math.random()*16777215).toString(16);
+    const colors = ['red', 'blue', 'yellow'];
+    return colors[Math.floor(Math.random() * colors.length - 1) + 1];
   }
 
   ngOnDestroy(): void {

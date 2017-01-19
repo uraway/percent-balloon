@@ -3,7 +3,6 @@
   <form (submit)="submit(answer.value)" class="form-horizontal">
     <div class="center jumbotron">
       <p>
-        残り: {{score}} バルーン
         <br /> Q. {{stage + 1}}. {{currentQuiz.text}}
       </p>
     </div>
@@ -16,7 +15,7 @@
     </div>
 
     <div *ngIf="ans" class="form-group form-group-lg">
-      <label class="col-sm-6 control-label">正解: {{ans}}</label>
+      <label class="col-sm-6 control-label">正解: {{ans}} %</label>
       <div class="col-sm-4"></div>
       <button class="btn btn-secondary btn-lg col-sm-2" (click)="next()">NEXT</button>
     </div>
