@@ -1,3 +1,4 @@
+import { Console } from '@angular/compiler/src/private_import_core';
 import * as console from 'console';
 import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -43,12 +44,13 @@ export class QuizComponent implements OnInit, OnDestroy, AfterViewInit {
       for (let l = 0; l < i; l++) {
         var ctx = this.context;
         ctx.beginPath();
+        var img = new Image();
         var x: number = Math.random() * 500 + 100;
         var y: number = Math.random() * 500 + 100;
-        ctx.arc(x, y, 35, 0, Math.PI*2, false);
-        ctx.stroke();
-        ctx.fillStyle = this.colorGen();
-        ctx.fill();
+        img.src = `../../images/balloon_${this.colorGen()}.png`;
+        img.onload = function() {
+          ctx.drawImage(img, x, y, 40, 60);
+        }
       }
       ctx.font = "bold 120px 'ＭＳ Ｐゴシック'";
       ctx.fillStyle = "black";
