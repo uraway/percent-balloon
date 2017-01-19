@@ -46,12 +46,17 @@ export class QuizComponent implements OnInit, OnDestroy, AfterViewInit {
         ctx.beginPath();
         var x: number = Math.random() * 500 + 100;
         var y: number = Math.random() * 500 + 100;
-        ctx.arc(x, y, 60, 0, Math.PI*2, false);
+        ctx.arc(x, y, 35, 0, Math.PI*2, false);
         ctx.stroke();
         ctx.fillStyle = this.colorGen();
         ctx.fill();
       }
     });
+  }
+
+  clear() {
+    var ctx = this.context;
+    ctx.clearRect(0, 0, 1200, 800);
   }
 
   colorGen(){
@@ -90,7 +95,12 @@ export class QuizComponent implements OnInit, OnDestroy, AfterViewInit {
     } else {
       this.displayMsg(`正解: ${correctAnswer}`);
       this.displayMsg2(`${diff} のバルーンを失いました!`);
+
       this.score -= diff;
+      this.clear();
+      this.balloons(this.score)
+
+
       if (this.score <= 0) {
         this.finish(0);
       }
@@ -104,10 +114,6 @@ export class QuizComponent implements OnInit, OnDestroy, AfterViewInit {
   displayMsg2(msg2: string): void {
     this.msg2 = msg2;
   }
-
-  displayDiff(diff: string) {
-
-}
 
   finish(finalScore: number): void {
     localStorage.setItem('score', String(finalScore));
