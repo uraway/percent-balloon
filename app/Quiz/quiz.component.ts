@@ -19,8 +19,7 @@ export class QuizComponent implements OnInit, OnDestroy, AfterViewInit {
   givenQuizes: Quiz[];
   score = 100;
   answer = 0;
-  msg = "";
-  msg2 = "";
+  ans = "";
   buttonDisabled = false;
   context:CanvasRenderingContext2D;
 
@@ -83,36 +82,26 @@ export class QuizComponent implements OnInit, OnDestroy, AfterViewInit {
     } else {
       this.stage += 1;
       this.currentQuiz = this.givenQuizes[this.stage];
-      this.msg = "";
+      this.ans = "";
     }
   }
 
   checkAnswer(userAnswer: number): void {
     const correctAnswer = this.currentQuiz.value;
     const diff = Math.abs(correctAnswer - userAnswer);
-    if (diff === 0) {
-      this.displayMsg('正解!');
-    } else {
-      this.displayMsg(`正解: ${correctAnswer}`);
-      this.displayMsg2(`${diff} のバルーンを失いました!`);
+    this.displayAns(`${correctAnswer}`);
 
-      this.score -= diff;
-      this.clear();
-      this.balloons(this.score)
+    this.score -= diff;
+    this.clear();
+    this.balloons(this.score)
 
-
-      if (this.score <= 0) {
-        this.finish(0);
-      }
+    if (this.score <= 0) {
+      this.finish(0);
     }
   }
 
-  displayMsg(msg: string): void {
-    this.msg = msg;
-  }
-
-  displayMsg2(msg2: string): void {
-    this.msg2 = msg2;
+  displayAns(ans: string): void {
+    this.ans = ans;
   }
 
   finish(finalScore: number): void {
