@@ -6,13 +6,10 @@ import { Http } from '@angular/http';
 import { DataService } from '../services/data.service';
 
 import { ToastComponent } from '../shared/toast/toast.component';
-import { Quiz } from '../Quiz/Quiz'
-import { QuizService } from '../Quiz/quiz.service'
 
 @Component({
   moduleId: module.id,
-  templateUrl: 'quizes.component.html',
-  providers: [QuizService]
+  templateUrl: 'quizes.component.html'
 })
 
 export class QuizesComponent implements OnInit {
@@ -23,7 +20,6 @@ export class QuizesComponent implements OnInit {
   isEditing = false;
 
   constructor(
-    private quizSercvice: QuizService,
     private route: ActivatedRoute,
     private location: Location,
     private router: Router,

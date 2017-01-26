@@ -6,19 +6,17 @@ import { Router } from '@angular/router';
 import { Subscription } from "rxjs";
 import { TimerObservable } from "rxjs/observable/TimerObservable";
 
-import { Quiz } from './Quiz';
-import { QuizService } from '../Quiz/quiz.service';
+import { DataService } from '../services/data.service';
 
 @Component({
   moduleId: module.id,
   selector: 'my-quiz',
-  templateUrl: 'quiz.component.html',
-  providers: [QuizService]
+  templateUrl: 'quiz.component.html'
 })
 export class QuizComponent implements OnInit, OnDestroy, AfterViewInit {
   stage = 0;
-  currentQuiz: Quiz;
-  givenQuizes: Quiz[];
+  currentQuiz: any = {};
+  givenQuizes: any = [];
   score = 100;
   answer = 0;
   ans = "";
@@ -27,7 +25,10 @@ export class QuizComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild("myCanvas") myCanvas: any;
 
-  constructor(private quizService: QuizService, private router: Router) {}
+  constructor(
+    private router: Router,
+    private dataService: DataService
+  ) {}
 
   ngAfterViewInit() {
     // 参照をとれる
@@ -101,10 +102,13 @@ export class QuizComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   getQuizes(): void {
-    this.quizService.getQuizes().then((quizes) => {
-      this.givenQuizes = this.shuffle(quizes).slice(0, 5);
-      this.currentQuiz = this.givenQuizes[0];
-    });
+    this.dataService.getQuizes().subscribe(
+      data => {
+        this.givenQuizes = this.shuffle(data).slice(0, 5);
+        this.currentQuiz = this.givenQuizes[0];
+      },
+      error => window.console.log(error),
+    );
   }
 
   submit(userAnswer: number): void {
@@ -146,7 +150,7 @@ export class QuizComponent implements OnInit, OnDestroy, AfterViewInit {
     this.router.navigate(['result']);
   }
 
-  shuffle(array: Array<Quiz>): Array<Quiz> {
+  shuffle(array: any) {
     let n = array.length;
     let t: any;
     let i: any;
