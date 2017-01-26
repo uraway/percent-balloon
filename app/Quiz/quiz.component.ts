@@ -62,7 +62,7 @@ export class QuizComponent implements OnInit, OnDestroy, AfterViewInit {
       }
       ctx.font = "bold 120px 'ＭＳ Ｐゴシック'";
       ctx.fillStyle = "black";
-      ctx.fillText(`${i}`, 250, 350);
+      ctx.fillText(`${i}`, 170, 300);
     });
   }
 
@@ -76,7 +76,7 @@ export class QuizComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   randomXY() {
-    return Math.random() * 500 + 100;
+    return Math.random() * 250 + 100;
   }
 
   ngOnDestroy(): void {
