@@ -1,3 +1,4 @@
+import { setTimeout } from 'timers';
 import { Console } from '@angular/compiler/src/private_import_core';
 import * as console from 'console';
 import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
@@ -40,6 +41,23 @@ export class QuizComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   balloons(i: number): void {
+
+    var audio = new Audio();
+    audio.src = "../../audio/balloon.mp3";
+    audio.load();
+
+    var count = 100;
+    var countup = () => {
+      if (count === i) return;
+      window.console.log(count--);
+      audio.play();
+    }
+    var id = window.setInterval(() => {
+      countup();
+      if (i > count){
+        window.clearInterval(id);　//idをclearIntervalで指定している
+      }}, 50);
+
     requestAnimationFrame(() => {
       for (let l = 0; l < i; l++) {
         var ctx = this.context;
@@ -112,7 +130,7 @@ export class QuizComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.score -= diff;
     this.clear();
-    this.balloons(this.score)
+    this.balloons(this.score);
 
     if (this.score <= 0) {
       this.finish(0);
