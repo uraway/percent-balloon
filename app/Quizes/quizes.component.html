@@ -1,4 +1,14 @@
 <h2>Quizes</h2>
+
+<div class="card" *ngIf="isLoading">
+  <h4 class="card-header">Loading...</h4>
+  <div class="card-block text-xs-center">
+    <i class="fa fa-circle-o-notch fa-spin fa-3x"></i>
+  </div>
+</div>
+
+<app-toast [message]="toast.message"></app-toast>
+
 <h4 class="card-header">Current Quizes ({{quizes.length}})</h4>
 <div class="card-block">
   <table class="table table-bordered table-striped">

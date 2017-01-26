@@ -7,6 +7,7 @@ import { FormGroup, FormControl, Validators, FormBuilder }  from '@angular/forms
 import { Quiz } from '../Quiz/Quiz'
 import { QuizService } from '../Quiz/quiz.service'
 
+import { ToastComponent } from '../shared/toast/toast.component';
 import { DataService } from '../services/data.service';
 
 @Component({
@@ -29,7 +30,8 @@ export class AddQuizComponent {
     private location: Location,
     private router: Router,
     private dataService: DataService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public toast: ToastComponent
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +47,7 @@ export class AddQuizComponent {
         let newQuiz = res.json();
         this.quizes.push(newQuiz);
         this.addQuizForm.reset();
+        this.toast.setMessage('item added successfully.', 'success');
       },
       error => console.log(error)
     );

@@ -159,3 +159,12 @@ input {
   top: 50%;       /*上端を中央に*/
   left: 50%;      /*左端を中央に*/
 }
+
+.alert {
+	z-index: 999;
+	position: fixed;
+	bottom: 15px;
+	left: 25%;
+	width: 50%;
+	opacity: 0.9;
+}

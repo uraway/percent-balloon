@@ -11,6 +11,7 @@ import { AddQuizComponent } from './Quizes/add-quiz.component';
 import { QuizDetailComponent } from './QuizDetail/quiz-detail.component';
 import { QuizesComponent } from './Quizes/quizes.component';
 import { ResultComponent } from './Result/result.component';
+import { ToastComponent } from './shared/toast/toast.component';
 
 import { AppRoutingModule }     from './app-routing.module';
 import { DataService } from './services/data.service';
@@ -32,9 +33,13 @@ import { DataService } from './services/data.service';
     QuizDetailComponent,
     QuizesComponent,
     AddQuizComponent,
-    ResultComponent
+    ResultComponent,
+    ToastComponent
   ],
-  providers: [ DataService ],
+  providers: [
+    DataService,
+    ToastComponent
+  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

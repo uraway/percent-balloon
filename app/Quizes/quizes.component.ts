@@ -5,6 +5,7 @@ import { Location }                 from '@angular/common';
 import { Http } from '@angular/http';
 import { DataService } from '../services/data.service';
 
+import { ToastComponent } from '../shared/toast/toast.component';
 import { Quiz } from '../Quiz/Quiz'
 import { QuizService } from '../Quiz/quiz.service'
 
@@ -27,6 +28,7 @@ export class QuizesComponent implements OnInit {
     private location: Location,
     private router: Router,
     private dataService: DataService,
+    public toast: ToastComponent
   ) {}
 
   ngOnInit(): void {
@@ -49,7 +51,7 @@ export class QuizesComponent implements OnInit {
   cancelEditing() {
     this.isEditing = false;
     this.quiz = {};
-
+    this.toast.setMessage('item editing cancelled.', 'warning');
     // reload the cats to reset the editing
     this.getQuizes();
   }
@@ -59,6 +61,7 @@ export class QuizesComponent implements OnInit {
       res => {
         this.isEditing = false;
         this.quiz = quiz;
+        this.toast.setMessage('item edited successfully.', 'success');
       },
       error => console.log(error)
     );
@@ -70,6 +73,7 @@ export class QuizesComponent implements OnInit {
         res => {
           let pos = this.quizes.map(elem => { return elem._id; }).indexOf(quiz._id);
           this.quizes.splice(pos, 1);
+          this.toast.setMessage('item deleted successfully.', 'success');
         },
         error => console.log(error)
       );
