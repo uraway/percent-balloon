@@ -54,7 +54,7 @@ export class QuizesComponent implements OnInit {
     this.getQuizes();
   }
 
-  editCat(quiz: any) {
+  editQuiz(quiz: any) {
     this.dataService.editQuiz(quiz).subscribe(
       res => {
         this.isEditing = false;
@@ -62,5 +62,17 @@ export class QuizesComponent implements OnInit {
       },
       error => console.log(error)
     );
+  }
+
+  deleteQuiz(quiz: any) {
+    if (window.confirm('Are you sure you want to permanently delete this item?')) {
+      this.dataService.deleteQuiz(quiz).subscribe(
+        res => {
+          let pos = this.quizes.map(elem => { return elem._id; }).indexOf(quiz._id);
+          this.quizes.splice(pos, 1);
+        },
+        error => console.log(error)
+      );
+    }
   }
 }

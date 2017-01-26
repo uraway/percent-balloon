@@ -19,7 +19,8 @@
         <td class="col-md-9">{{quiz.text}}</td>
         <td class="col-md-1">{{quiz.value}}</td>
         <td class="col-md-2">
-          <button class="btn btn-sm btn-warning" (click)="enableEditing(quiz)"><i class="fa fa-pencil"></i> Edit</button>          <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete</button>
+          <button class="btn btn-sm btn-warning" (click)="enableEditing(quiz)"><i class="fa fa-pencil"></i> Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteQuiz(quiz)"><i class="fa fa-trash"></i> Delete</button>
         </td>
       </tr>
     </tbody>
