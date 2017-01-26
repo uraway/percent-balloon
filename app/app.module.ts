@@ -1,6 +1,7 @@
 import { NgModule }       from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
-import { FormsModule }    from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 import { AppComponent }         from './app.component';
 import { DashboardComponent }   from './Dashboard/dashboard.component';
@@ -12,12 +13,16 @@ import { QuizesComponent } from './Quizes/quizes.component';
 import { ResultComponent } from './Result/result.component';
 
 import { AppRoutingModule }     from './app-routing.module';
+import { DataService } from './services/data.service';
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     AppComponent,
@@ -29,7 +34,7 @@ import { AppRoutingModule }     from './app-routing.module';
     AddQuizComponent,
     ResultComponent
   ],
-  providers: [],
+  providers: [ DataService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

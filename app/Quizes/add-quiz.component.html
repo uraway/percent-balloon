@@ -1,11 +1,13 @@
 <h2>Add Quiz</h2>
-<button class="btn btn-secondary" (click)="goBack()">Back</button>
-<div class="form-group">
-  <label>Text:</label>
-  <input class="form-control" required />
-</div>
-<div class="form-group">
-  <label>Answer:</label>
-  <input class="form-control" type="number" required />
-</div>
-<button class="btn btn-primary">Add</button>
+
+<form [formGroup]="addQuizForm" (ngSubmit)="addQuiz()">
+  <div class="form-group">
+    <label>Text:</label>
+    <input class="form-control" formControlName="text" name="text" placeholder="Text"/>
+  </div>
+  <div class="form-group">
+    <label>Value:</label>
+    <input class="form-control" type="number" formControlName="value" name="value" placeholder="Value" />
+  </div>
+  <button class="btn btn-primary" type="submit" [disabled]="!addQuizForm.valid">Add</button>
+</form>
