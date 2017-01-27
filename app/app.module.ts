@@ -1,6 +1,7 @@
 import { NgModule }       from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
-import { FormsModule }    from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 import { AppComponent }         from './app.component';
 import { DashboardComponent }   from './Dashboard/dashboard.component';
@@ -10,14 +11,19 @@ import { AddQuizComponent } from './Quizes/add-quiz.component';
 import { QuizDetailComponent } from './QuizDetail/quiz-detail.component';
 import { QuizesComponent } from './Quizes/quizes.component';
 import { ResultComponent } from './Result/result.component';
+import { ToastComponent } from './shared/toast/toast.component';
 
 import { AppRoutingModule }     from './app-routing.module';
+import { DataService } from './services/data.service';
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     AppComponent,
@@ -27,9 +33,13 @@ import { AppRoutingModule }     from './app-routing.module';
     QuizDetailComponent,
     QuizesComponent,
     AddQuizComponent,
-    ResultComponent
+    ResultComponent,
+    ToastComponent
   ],
-  providers: [],
+  providers: [
+    DataService,
+    ToastComponent
+  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

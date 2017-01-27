@@ -144,3 +144,27 @@ input, textarea, select, .uneditable-input {
 input {
   height: auto !important;
 }
+
+.box {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  min-width: 600px;   /*中央配置するボックスの横幅*/
+  min-height: 400px;  /*中央配置するボックスの縦幅*/
+}
+
+#myCanvas {
+  margin: -200px 0 0 -300px;  /*縦横半分をネガティブマージンでずらす*/
+  position: absolute;     /*body要素に対して絶対配置*/
+  top: 50%;       /*上端を中央に*/
+  left: 50%;      /*左端を中央に*/
+}
+
+.alert {
+	z-index: 999;
+	position: fixed;
+	bottom: 15px;
+	left: 25%;
+	width: 50%;
+	opacity: 0.9;
+}

@@ -1,24 +1,35 @@
+import { ANY_STATE } from '@angular/compiler/src/private_import_core';
 import { Component, OnInit } from '@angular/core';
 
-import { User } from '../User/user';
-import { UserService } from '../User/user.service';
+import { DataService } from '../services/data.service';
+
+import { ToastComponent } from '../shared/toast/toast.component';
 
 @Component({
   moduleId: module.id,
   selector: 'my-dashboard',
-  templateUrl: 'dashboard.component.html',
-  providers: [UserService]
+  templateUrl: 'dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
-  users: User[];
+  users: any = [];
+  isLoading = false;
 
-  constructor(private userService: UserService) { }
+  constructor(
+    private dataService: DataService,
+    public toast: ToastComponent
+  ) { }
 
   getUsers(): void {
-    this.userService.getUsers().then(users => this.users = this.sortByScore(users));
+    this.dataService.getUsers().subscribe(
+      data => {
+        this.users = this.sortByScore(data)
+      },
+      error => console.log(error),
+      () => this.isLoading = false
+    );
   }
 
-  sortByScore(users: User[]): User[] {
+  sortByScore(users: any) {
     users.sort((a: any, b: any) => {
       if (a.score > b.score) return -1;
       if (b.score > a.score) return 1;
