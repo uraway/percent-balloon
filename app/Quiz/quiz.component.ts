@@ -34,28 +34,27 @@ export class QuizComponent implements OnInit, OnDestroy, AfterViewInit {
     // 参照をとれる
     let canvas = this.myCanvas.nativeElement;
     this.context = canvas.getContext("2d");
-    this.balloons(100);
+    this.balloons(100, 0);
   }
 
   ngOnInit(): void {
     this.getQuizes();
   }
 
-  balloons(i: number): void {
+  balloons(i: number, diff: number): void {
 
     var audio = new Audio();
     audio.src = "../../audio/balloon.mp3";
     audio.load();
 
-    var count = 100;
+    var count = 0;
     var countup = () => {
-      if (count === i) return;
-      window.console.log(count--);
+      window.console.log(count++);
       audio.play();
     }
     var id = window.setInterval(() => {
       countup();
-      if (i > count){
+      if (diff === 0 || diff <= count){
         window.clearInterval(id);　//idをclearIntervalで指定している
       }}, 50);
 
@@ -134,7 +133,7 @@ export class QuizComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.score -= diff;
     this.clear();
-    this.balloons(this.score);
+    this.balloons(this.score, diff);
 
     if (this.score <= 0) {
       this.finish(0);
