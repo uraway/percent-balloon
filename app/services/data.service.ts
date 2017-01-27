@@ -32,4 +32,12 @@ export class DataService {
     return this.http.delete(`http://localhost:8080/quizes/${quiz._id}`, this.options);
   }
 
+  getUsers(): Observable<any> {
+    return this.http.get('http://localhost:8080/users').map(res => res.json());
+  }
+
+  addUser(user: any): Observable<any> {
+    return this.http.post('http://localhost:8080/users', JSON.stringify(user), this.options)
+  }
+
 }
